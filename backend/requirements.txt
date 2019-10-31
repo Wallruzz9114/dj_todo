@@ -2,3 +2,6 @@ Django
 djangorestframework
 django-cors-headers
 psycopg2-binary
+djangorestframework-jwt
+cryptography
+python-jose
