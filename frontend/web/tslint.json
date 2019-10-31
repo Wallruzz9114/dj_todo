@@ -6,6 +6,7 @@
     "deprecation": {
       "severity": "warning"
     },
+    "ordered-imports": true,
     "component-class-suffix": true,
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
@@ -66,7 +67,6 @@
       "as-needed"
     ],
     "object-literal-sort-keys": false,
-    "ordered-imports": false,
     "quotemark": [
       true,
       "single"
