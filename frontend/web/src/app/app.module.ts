@@ -5,12 +5,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
+import { CallbackComponent } from './components/callback/callback.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskListComponent
+    TaskListComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,

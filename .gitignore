@@ -44,3 +44,5 @@
 # System Files
 /frontend/web/.DS_Store
 /frontend/web/Thumbs.db
+
+/frontend/web/src/environments/

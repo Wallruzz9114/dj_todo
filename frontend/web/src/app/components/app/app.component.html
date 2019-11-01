@@ -1,5 +1,15 @@
 <h1>Todo App</h1>
 
-<app-task-list></app-task-list>
+<button *ngIf='!authService.isLoggedIn' (click)='authService.login()'>
+  Log In
+</button>
+
+<button *ngIf='authService.isLoggedIn' (click)='authService.logout()'>
+  Log Out
+</button>
+
+<nav>
+  <a *ngIf='authService.isLoggedIn' routerLink='/tasks'>My Tasks</a>
+</nav>
 
 <router-outlet></router-outlet>
