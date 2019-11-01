@@ -4,7 +4,10 @@ from rest_framework import generics
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status  
+from rest_framework import status
+from rest_framework_jwt.utils import jwt_decode_handler
+from .utils import get_auth0_user_id_from_request
+
 
 class TaskList(generics.ListCreateAPIView):
     '''
@@ -12,6 +15,24 @@ class TaskList(generics.ListCreateAPIView):
     '''
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+
+    def perform_create(self, serializer):
+        token = self.request.META.get('HTTP_AUTHORIZATION', '').split()[1]
+        payload = jwt_decode_handler(token)
+        auth0_user_id = get_auth0_user_id_from_request(self.request)
+        # Set the user to the one in the token.
+        serializer.save(created_by=auth0_user_id)
+
+    def get_queryset(self):
+        '''
+        This view should return a list of all Tasks
+        for the currently authenticated user.
+        '''
+        token = self.request.META.get('HTTP_AUTHORIZATION', '').split()[1]
+        payload = jwt_decode_handler(token)
+        auth0_user_id = payload.get('sub')
+        return Task.objects.filter(created_by=auth0_user_id)
+
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
