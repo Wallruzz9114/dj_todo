@@ -5,3 +5,4 @@ psycopg2-binary
 djangorestframework-jwt
 cryptography
 python-jose
+uWSGI
