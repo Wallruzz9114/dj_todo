@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_jwt.utils import jwt_decode_handler
 from .utils import get_auth0_user_id_from_request
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsCreator
 
 
 class TaskList(generics.ListCreateAPIView):
@@ -40,4 +42,5 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     '''
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated, IsCreator]
     lookup_url_kwarg = 'task_id'
